@@ -74,6 +74,7 @@ class GameScene extends Phaser.Scene {
       this.gameCar.setX(stageSize.width);
       this.gameCar.setY(this.newCarLine());
     }
+    this.adjustDepth();
   }
 
   updateGamePlayerPosition(adj) {
@@ -91,8 +92,17 @@ class GameScene extends Phaser.Scene {
 
   adjustDepth(){
     this.debugTxt.setText(`Player line: ${this.gamePlayerLine}, Car line: ${this.gameCarLine}`)
-    this.gameCar.setDepth(this.carLine);
-    this.gamePlayer.setDepth(this.playerLine);
+    /*
+    if(this.gameCarLine < this.playerLine){
+      this.children.depthSort([this.gameCar, this.gamePlayer]);
+    }else{
+      this.children.depthSort([this.gamePlayer, this.gameCar]);
+    }
+    */
+   
+    this.gameCar.setDepth(this.gameCarLine+1);
+    this.gamePlayer.setDepth(this.gamePlayerLine+1);
+    
   }
 }
 
